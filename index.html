@@ -12,6 +12,8 @@
 <script>
 const $=s=>document.querySelector(s), STORE='minitok_v3_state';
 let db=load(),user=localStorage.getItem('minitok_v3_user')||'',authMode='signup',page='home',liveStream=null;
+// Starter feed: show demo videos for new/empty installs.
+if(!db.posts.length){db.posts=[{id:'demo-bunny',user:'minitok_official',caption:'MiniTok demo видео 🎬 — Play дээр дарж үзээрэй',url:'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',created:Date.now()},{id:'demo-joyride',user:'minitok_official',caption:'Demo clip ✨',url:'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',created:Date.now()-1},{id:'demo-escape',user:'minitok_official',caption:'Өөр нэг demo видео 🌈',url:'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',created:Date.now()-2}];save()}
 function load(){try{return JSON.parse(localStorage.getItem(STORE))||{users:[],posts:[],comments:{},likes:{},follows:{},messages:[],rooms:[]}}catch{return{users:[],posts:[],comments:{},likes:{},follows:{},messages:[],rooms:[]}}}
 function save(){localStorage.setItem(STORE,JSON.stringify(db))}
 function me(){return db.users.find(u=>u.username===user)}
